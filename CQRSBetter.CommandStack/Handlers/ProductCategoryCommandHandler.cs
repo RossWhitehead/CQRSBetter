@@ -11,9 +11,7 @@ using System.Threading.Tasks;
 
 namespace CQRSBetter.CommandStack.Handlers
 {
-    public class ProductCategoryCommandHandler : ICommandHandler<AddOrUpdateProductCategoryCommand>,
-                                                 ICommandHandler<CreateProductCategoryCommand>,
-                                                 ICommandHandler<DeleteProductCategoryCommand>
+    public class ProductCategoryCommandHandler : IProductCategoryCommandHandler
     {
         private CommandDbContext db;
 
@@ -22,7 +20,7 @@ namespace CQRSBetter.CommandStack.Handlers
             this.db = db;
         }
 
-        public Task<CommandResult> HandleAsync(CreateProductCategoryCommand command)
+        public async Task<CommandResult> HandleAsync(CreateProductCategoryCommand command)
         {
             throw new NotImplementedException();
         }

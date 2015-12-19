@@ -1,4 +1,6 @@
-﻿namespace CQRSBetter.Domain.DomainModel
+﻿using System;
+
+namespace CQRSBetter.Domain.DomainModel
 {
     public class Product
     {

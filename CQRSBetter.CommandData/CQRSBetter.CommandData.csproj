@@ -68,6 +68,12 @@
       <DependentUpon>201512061345305_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CQRSBetter.Infrastructure\CQRSBetter.Infrastructure.csproj">
+      <Project>{8d958de5-cb2b-4426-80ad-84da58955f16}</Project>
+      <Name>CQRSBetter.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,9 +1,12 @@
-﻿namespace CQRSBetter.Domain.DomainModel
+﻿using System;
+
+namespace CQRSBetter.Domain.DomainModel
 {
     public class ProductCategory
     {
         public int ProductCategoryId { get; set; }
         public string ProductCategoryName { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
 
         public ProductCategory(string productCategoryName) : this(0, productCategoryName)
         {

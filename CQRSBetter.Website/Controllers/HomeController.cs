@@ -6,26 +6,24 @@ using System.Web.Mvc;
 
 namespace CQRSBetter.Website.Controllers
 {
-    public class HomeController : Controller
+    public partial class HomeController : Controller
     {
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
-            throw new Exception("Thrown by me");
-            return View();
+            return View(Views.Index);
         }
 
-        public ActionResult About()
+        public virtual ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            return RedirectToAction(Actions.Index());
         }
 
-        public ActionResult Contact()
+        public virtual ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(Views.Contact);
         }
     }
 }

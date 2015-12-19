@@ -8,24 +8,29 @@ using CQRSBetter.CommandStack.Commands;
 using AutoMapper;
 using CQRSBetter.CommandData;
 using CQRSBetter.Infrastructure.Command;
+using NodaTime;
 
 namespace CQRSBetter.Domain.Services
 {
     public class ProductCategoryService : IProductCategoryService
     {
-        public ProductCategoryService()
+        IClock clock;
+        IProductCategoryCommandHandler handler;
+        CommandDbContext db;
+
+        public ProductCategoryService(IClock clock, IProductCategoryCommandHandler handler, CommandDbContext db)
         {
+            this.clock = clock;
+            this.handler = handler;
+            this.db = db;
         }
 
         public async Task<DomainResult> AddOrUpdateProductCategory(ProductCategory productCategory)
         {
-            using (CommandDbContext db = new CommandDbContext())
-            {
-                ProductCategoryCommandHandler handler = new ProductCategoryCommandHandler(db);
-                AddOrUpdateProductCategoryCommand command = Mapper.Map<AddOrUpdateProductCategoryCommand>(productCategory);
-                CommandResult commandResult = await handler.HandleAsync(command);
-                return Mapper.Map<DomainResult>(commandResult);
-            }
+            AddOrUpdateProductCategoryCommand command = Mapper.Map<AddOrUpdateProductCategoryCommand>(productCategory);
+            productCategory.LastUpdatedOn = clock.Now.ToDateTimeUtc();
+            CommandResult commandResult = await handler.HandleAsync(command);
+            return Mapper.Map<DomainResult>(commandResult);
         }
 
         public async Task<DomainResult> CreateProductCategory(ProductCategory productCategory)
